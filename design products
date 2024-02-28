@@ -1,0 +1,72 @@
+class Inventory {
+private:
+    vector<Product> products;
+
+public:
+ void addProduct(Product product) {
+        products.push_back(product);
+        cout << "Product added successfully." << endl;
+    }
+
+ void updateProduct(int productId, Product updatedProduct) {
+        auto it = find_if(products.begin(), products.end(), [&](const Product &p) {
+            return p.id == productId;
+        });
+
+        if (it != products.end()) {
+            *it = updatedProduct;
+            cout << "Product updated successfully." << endl;
+        } else {
+            cout << "Product not found." << endl;
+        }
+    }
+
+ void deleteProduct(int productId) {
+        auto it = remove_if(products.begin(), products.end(), [&](const Product &p) {
+            return p.id == productId;
+        });
+
+        if (it != products.end()) {
+            products.erase(it);
+            cout << "Product deleted successfully." << endl;
+        } else {
+            cout << "Product not found." << endl;
+        }
+    }
+};
+int main() {
+
+    Inventory inventory;
+    Product newProduct;
+    newProduct.id = 1;
+    newProduct.name = "Laptop";
+    newProduct.price = 999.99;
+    newProduct.quantity = 10;
+    inventory.addProduct(newProduct);
+
+    Product updatedProduct;
+    updatedProduct.id = 1;
+    updatedProduct.name = "Updated Laptop";
+    updatedProduct.price = 1099.99;
+    updatedProduct.quantity = 8;
+    inventory.updateProduct(1, updatedProduct);
+    inventory.deleteProduct(1);
+
+    return 0;
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
